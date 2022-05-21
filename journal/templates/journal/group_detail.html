@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Журнал групи {{ group.grade }} {% endblock %}
+
+{% block content %}
+    <h1>Журнал - {{ group.grade }}</h1>
+
+    <h2>Дисципліни групи {{ group.grade }}</h2>
+    <table class="table-journal">
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>Дисципліна</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for lesson in group.grade.lessons.all %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td><a href="{% url "score_lesson" group.id lesson.id %}">{{ lesson }}</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Список студентів групи {{ group.grade }}</h2>
+    <a class="btn btn-success" href="{% url 'student_add' %}">+ Додати студента</a>
+    <table class="table-journal">
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>Фото</th>
+                <th>ПІБ</th>
+                <th>Дата народження</th>
+                <th>Характеристика</th>
+                <th>Редагувати</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>
+                        <a href="{{ student.student.get_absolute_url }}">
+                            <img class="user-avatar-mini" src="{{ student.photo.url }}" alt="{{ student.get_full_name }}">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ student.student.get_absolute_url }}">
+                            {{ student.get_full_name }}
+                        </a>
+                    </td>
+                    <td>{{ student.birth_date|date:'d.m.Y' }}</td>
+                    <td>{{ student.description }}</td>
+                    <td>
+                        <a class="btn btn-dark" href="{% url 'student_update' student.id %}">Редагувати</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

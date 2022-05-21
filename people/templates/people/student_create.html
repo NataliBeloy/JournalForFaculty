@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% block title %}Новий студент{% endblock %}
+
+{% block content %}
+    <h1>Новий студент</h1>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class="create-form">
+            {% csrf_token %}
+            <div id="left-side">
+                <p>
+                    {{ form.username }}
+                    {{ form.username.errors }}
+                </p>
+
+                <p>
+                    {{ form.email }}
+                    {{ form.email.errors }}
+                </p>
+
+                <p>
+                    {{ form.password }}
+                    {{ form.password.errors }}
+                </p>
+
+                <p>
+                    {{ form.first_name }}
+                    {{ form.first_name.errors }}
+                </p>
+                <p>
+                    {{ form.last_name }}
+                    {{ form.last_name.errors }}
+                </p>
+
+                <p>
+                    {{ form.middle_name }}
+                    {{ form.middle_name.errors }}
+                </p>
+                <p>
+                    <label for="{{ form.birth_date.id_for_label }}">Дата народження:</label> <br>
+                    {{ form.birth_date }}
+                    {{ form.birth_date.errors }}
+                </p>
+
+                 <p>
+                    <label for="{{ form.sex.id_for_label }}">Стать:</label> <br>
+                    {{ form.sex }}
+                    {{ form.sex.errors }}
+                </p>
+            </div>
+
+            <div id="right-side">
+                <p>
+                    {{ form.description }}
+                    {{ form.description.errors }}
+                </p>
+                <p style="color: #606479; font-size: 14px">Фото студента:</p>
+                <p>
+                    <label class="label-file" for="{{ form.photo.id_for_label }}">Завантажити фото</label> <br>
+                    <input type="file" name="photo" class="input-file" accept="image/*" id="id_photo"
+                           onchange="document.getElementById('upload-file-info').innerText = this.value;">
+                    <br>
+                    <span class='label-info' id="upload-file-info"></span>
+                    {{ form.photo.errors }}
+                </p>
+                <p>
+                    <label for="{{ student_form.group.id_for_label }}">Студент групи:</label> <br>
+                    {{ student_form.group }}
+                    {{ student_form.group.errors }}
+                </p>
+                <p>
+                    <label>Форма навчання:</label> <br>
+                    {{ student_form.study_form }}
+                    {{ student_form.study_form.errors }}
+                </p>
+                <p>
+                    <label>Ступінь навчання:</label> <br>
+                    {{ student_form.study_degree }}
+                    {{ student_form.study_degree.errors }}
+                </p>
+                <p>
+                    <label>Рік вступу:</label> <br>
+                    {{ student_form.entry_year }}
+                    {{ student_form.entry_year.errors }}
+                </p>
+                <p>
+                    {{ contact_form.phone1 }}
+                    {{ contact_form.phone1.errors }}
+                </p>
+                <p>
+                    {{ contact_form.phone2 }}
+                    {{ contact_form.phone2.errors }}
+                </p>
+                <p>
+                    {{ contact_form.phone3 }}
+                    {{ contact_form.phone3.errors }}
+                </p>
+                <p>
+                    <label>Тема курсової роботи:</label> <br>
+                    {{ student_form.study_degree }}
+                    {{ student_form.study_degree.errors }}
+                </p>
+                <p>
+                    <label>Керівник курсової роботи:</label> <br>
+                    {{ student_form.course_supervisor }}
+                    {{ student_form.course_supervisor.errors }}
+                </p>
+                <p>
+                    <label>Тема кваліфікаційної роботи(бакалавр):</label> <br>
+                    {{ student_form.diploma_work }}
+                    {{ student_form.diploma_work.errors }}
+                </p>
+                <p>
+                    <label>Керівник кваліфікаційної роботи(бакалавр):</label> <br>
+                    {{ student_form.diploma_supervisor }}
+                    {{ student_form.diploma_supervisor.errors }}
+                </p>
+            </div>
+
+
+            <div id="contact">
+                <input type="submit" class="save_button" value="Зберегти">
+            </div>
+
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Список співробітників{% endblock %}
+
+{% block content %}
+    <h1>Співробітики</h1>
+    <table class="table-journal">
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>Фото</th>
+                <th>ПІБ</th>
+                <th>Посада</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in user_list %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td><img class="user-avatar-mini" src="{{ user.photo.url }}" alt=""></td>
+                    <td>
+                        <a href="{{ user.teacher.get_absolute_url }}">
+                            {{ user.get_full_name }}
+                        </a>
+                    </td>
+                    <td>{{ user.teacher.position }}</td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+{% endblock %}

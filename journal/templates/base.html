@@ -1,0 +1,33 @@
+{% load static %}
+{% load sidebar %}
+{% load filters %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <title>{% block title %}Журнал{% endblock %}</title>
+</head>
+<body>
+    <div id="header"></div>
+    {% block sidebar %}
+        <div class="sidebar">
+         {% if request.user.user_status == 'student' %}
+             {% student_sidebar request.user %}
+         {% else %}
+             {% teacher_sidebar request.user %}
+         {% endif %}
+        </div>
+    {% endblock %}
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <div id="footer">
+        <p>© Київський національний університет імені Тараса Шевченка Кафедра Програмних систем і технологій</p>
+    </div>
+</body>
+</html>

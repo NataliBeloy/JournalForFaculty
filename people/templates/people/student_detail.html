@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Детальна інформація {{ user.get_full_name }}{% endblock %}
+
+{% block content %}
+    <h1>Інформація про студента </h1>
+    <div class="people-info ">
+        <div class="people-photo-block">
+            <img class="user-avatar" src="{{ user.photo.url }}" alt="{{ user.get_full_name }}">
+        </div>
+
+        <div class="people-info-block">
+            <h3>{{ user.get_full_name }}</h3>
+            <p><i><u>Дата народження:</u></i> {{ user.birth_date|date:"d.m.Y" }}</p>
+            <p><i><u>Група:</u></i> {{ user.student.group.grade }}</p>
+            <p><i><u>Форма навчання:</u></i> {{ user.student.study_form }}</p>
+            <p><i><u>Ступінь навчання:</u></i> {{ user.student.study_degree }}</p>
+            <p><i><u>Рік вступу:</u></i> {{ user.student.entry_year }}</p>
+            <span class="small-font">Характеристика</span><hr>
+            <p>{{ user.description }}</p>
+
+            {% include "people/include/people_contact_info.html" %}
+
+            <div class="navigaonusing">
+                <div class="gaonutosal">
+                    <div class="pesontedan">
+                        <input id="pesontedan-one" type="checkbox" name="pesontedans">
+                        <label for="pesontedan-one">Детальна інформація</label>
+                        <div class="pesontedan-content">
+                            <p><i><u>Тема курсової роботи:</u></i> {{ user.student.course_work }}</p>
+                        </div>
+                        <div class="pesontedan-content">
+                            <p><i><u>Керівник курсової роботи:</u></i> {{ user.student.course_supervisor }}</p>
+                        </div>
+                        <div class="pesontedan-content">
+                            <p><i><u>Тема кваліфікаційної роботи(бакалавр):</u></i> {{ user.student.diploma_work }}</p>
+                        </div>
+                        <div class="pesontedan-content">
+                            <p><i><u>Керівник кваліфікаційної роботи(бакалавр):</u></i> {{ user.student.diploma_supervisor }}</p>
+                        </div>
+                    </div>
+               </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
