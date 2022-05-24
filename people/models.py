@@ -54,6 +54,9 @@ class Teacher(models.Model):
     group_manager = models.ForeignKey('journal.GroupStudent', related_name='teacher',
                                       on_delete=models.SET_NULL, null=True, blank=True)
     lessons = models.ManyToManyField('journal.Lesson', related_name='teachers', verbose_name='Викладає дисципліни')
+    education = models.TextField('Освіта')
+    study_work = models.TextField('Навчальна робота')
+    science_work = models.TextField('Наукові публікації')
     user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='teacher', on_delete=models.CASCADE)
 
     def get_absolute_url(self):

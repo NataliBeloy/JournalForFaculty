@@ -2,7 +2,8 @@
 {% block sidebar %}
     <h3>Особистий кабінет</h3>
     <img class="user-avatar" src="{{ user.photo.url }}" alt="{{ user.get_full_name }}">
-    <p><b>{{ user.get_full_name }}</b></p>
+    <p class="name"><a href="{{ user.student.get_absolute_url }}">{{ user.last_name }} {{ user.first_name }} {{ user.middle_name }}</a>
+    </p>
 <!--    <p><span class="small">Классный руководитель:</span> <br>{{ user_group_manager.get_full_name }}</p>-->
     <ul>
         <li><a href="{% url 'student_lk' %}">Мої оцінки</a></li><hr>

@@ -13,12 +13,17 @@
             <h3>{{ user.last_name }} {{ user.first_name }} {{ user.middle_name }}</h3>
             <p><i><u>Дата народження:</u></i> {{ user.birth_date|date:"d.m.Y" }}</p>
             <p><i><u>Посада:</u></i> {{ user.teacher.position }} </p>
+             {% include "people/include/people_contact_info.html" %}
 
 
-            <span class="small-font">Характеристика</span><hr>
-            <p>{{ user.description }}</p>
+            <span class="small-font">Освіта</span><hr>
+            <p>{{ user.teacher.education|linebreaks }}</p>
+            <span class="small-font">Навчальна робота</span><hr>
+            <p>{{ user.teacher.study_work|linebreaks }}</p>
+            <span class="small-font">Наукові публікації</span><hr>
+            <p>{{ user.teacher.science_work|linebreaks }}</p>
 
-            {% include "people/include/people_contact_info.html" %}
+
 
         </div>
     </div>

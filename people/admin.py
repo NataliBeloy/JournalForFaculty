@@ -30,7 +30,7 @@ class UserAdmin(admin.ModelAdmin):
 @admin.register(Teacher)
 class TeacherAdmin(admin.ModelAdmin):
     """Викладачі."""
-    list_display = ('get_full_name', 'group_manager', 'position', 'user')
+    list_display = ('get_full_name', 'group_manager', 'position', 'user', 'education', 'study_work', 'science_work', )
     list_filter = ('group_manager',)
     search_fields = ('get_full_name',)
 
