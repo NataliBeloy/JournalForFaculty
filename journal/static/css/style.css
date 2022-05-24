@@ -79,6 +79,15 @@ h1, h2, h3, h4 {
     grid-area: header;
     background: #FFA500
 }
+#logo {
+    padding-left: 60px;
+}
+#logotext {
+    padding-left:30px;
+    padding-top:0px;
+    font-size: 20px;
+    color: #35395A;
+}
 
 .content {
     grid-area: content;
@@ -99,14 +108,6 @@ h1, h2, h3, h4 {
 
 }
 
-
-
-.sidebar {
-    grid-area: sidebar;
-    padding: 8px;
-    background-color: #3a3a3a; /*#2a3142*/
-    border-right: 3px solid #6705EE; /*#35395A*/
-}
 /* список, що розкривається */
 .gaonutosal {
   float: left;
@@ -185,27 +186,67 @@ h1, h2, h3, h4 {
 .pesontedan input[type=radio]:checked + label::after {
   transform: rotateX(180deg);
 }
-.sidebar p {
-    color: white;
-    font-size: 14px;
+/*--------------------SIDEBAR-----------------------*/
+.sidebar {
+    font-family: Arial;
+    grid-area: sidebar;
+    padding: 8px;
+    background-color: #3a3a3a; /*#2a3142*/
+
+}
+.nav {
+  position: relative;
+  text-align: left;
+  top: 100px
+  transform: translateY(-50%);
+
+}
+.sidebar h3 {
+   line-height: 20px;
+    font-size: 16px;
+    text-decoration: none;
+    letter-spacing: 2px;
+    color: gold;
+    display: block;
+    text-align: center;
 }
 
 .sidebar a {
-    color: gold;
+    line-height: 20px;
     font-size: 14px;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 5px;
+    color: gold;
+    display: block;
+    transition: all ease-out 300ms;
+    text-align:center;
+}
+
+.sidebar p {
+    line-height: 13px;
+    font-size: 12px;
+    text-decoration: none;
+    letter-spacing: 2px;
+    color: white;
+
+    display: block;
+    text-align: center;
+
+}
+
+.sidebar hr{
+    color: gold;
+    width: 85%;
+    height: 0;
+    border: none;
+    border-top: 2px dashed gold;
+    opacity: 20%;
 }
 
 .sidebar h3 {
     color: gold;
     margin: 0;
-}
-
-.sidebar hr {
-    color: gold;
-    width: 95%;
-    height: 0;
-    border: none;
-    border-top: 2px dashed gold;
 }
 
 .sidebar img {
@@ -357,28 +398,31 @@ h1, h2, h3, h4 {
 }
 
 .login-form {
-    margin: auto;
-    width: 240px;
+    margin: 0px 300px;
+    width: 300px;
     background: white;
-    border: 1px solid #e2e3e6;
-    border-top: 2px solid #6705EE;
-    padding: 50px 50px 70px 40px;
+    border: 10px solid #e2e3e6;
+    border-top: 3px solid #6705EE;
+    padding: 50px 50px 70px 60px;
+    text-align:left;
 }
 
 .login-form p {
-    font-size: 14px;
+    font-size: 20px;
     font-weight: bold;
     color: #bd2327;
 }
 
 .login-form ul{
     padding: 0;
+
 }
 
 .login-form ul li {
-    font-size: 12px;
+    font-size: 14px;
     color: #bd2327;
     list-style-type: none;
+
 }
 
 .account {

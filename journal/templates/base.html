@@ -10,7 +10,15 @@
     <title>{% block title %}Журнал{% endblock %}</title>
 </head>
 <body>
-    <div id="header"></div>
+    <div id="header">
+        <div id="logo" style="float:left">
+            <img src="/media/people/graduation-hat.png" alt="Logo">
+        </div>
+        <div id="logotext" style="float:left">
+            <p>ЕЛЕКТРОННИЙ ЖУРНАЛ КАФЕДРИ ПРОГРАМНИХ СИСТЕМ І ТЕХНОЛОГІЙ</p>
+        </div>
+
+    </div>
     {% block sidebar %}
         <div class="sidebar">
          {% if request.user.user_status == 'student' %}

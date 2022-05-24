@@ -60,9 +60,12 @@ class StudentLkDetailView(LoginRequiredMixin, StudentPermissionsMixin, ScoreJour
         count_scores = scores.values('score').annotate(count_score=Count('score')).order_by('-score')
         total_scores = count_scores.aggregate(sum_count=Sum('count_score'),
                                               sum_score=Avg('score'),
-                                              sum_score_percent=Avg('score')*20)
+                                              sum_score_percent=Avg('score') * 20)
 
-        student_rating = {5: 0, 4: 0, 3: 0, 2: 0}
+        student_rating = {100: 0, 99: 0, 98: 0, 97: 0, 96: 0, 95: 0, 94: 0, 93: 0, 92: 0, 91: 0, 90: 0,
+                          89: 0, 88: 0, 87: 0, 86: 0, 85: 0, 84: 0, 83: 0, 82: 0, 81: 0, 80: 0, 79: 0, 78: 0,
+                          77: 0, 76: 0, 75: 0, 74: 0, 73: 0, 72: 0, 71: 0, 70: 0, 69: 0, 68: 0, 67: 0, 66: 0,
+                          65: 0, 64: 0, 63: 0, 62: 0, 61: 0, 60: 0, }
         for item in count_scores:
             student_rating[item['score']] = item['count_score']
 
