@@ -4,6 +4,7 @@
 
 {% block content %}
     <h1>Журнал - {{ group.grade }}</h1>
+    <a href="{% url 'generate-pdf' %}" target="_blank" class="btn btn-sm btn-success">Створити звіт</a>
     <h2>Дисципліни групи {{ group.grade }}</h2>
     <table class="table-journal">
         <thead>
