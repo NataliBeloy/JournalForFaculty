@@ -1,11 +1,7 @@
 from django.conf import settings
 from django.db import models
-from django.contrib.auth.models import User
 from django.urls import reverse_lazy
-
 from django_journal.settings import SCORE_CHOICES, STUDENT, TEACHER
-from people.models import Student, Teacher
-
 
 class Lesson(models.Model):
     """Довідка всіх дисциплін."""

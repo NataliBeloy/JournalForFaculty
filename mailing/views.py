@@ -35,7 +35,7 @@ class MailingCreate(LoginRequiredMixin, CreateView):
         form.save()
         to_users = User.objects.filter(id__in=form.cleaned_data['to_users'])
         for user in to_users:
-            send_notification.delay(user.email)
+            send_notification(user.email)
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):

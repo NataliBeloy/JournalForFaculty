@@ -1,5 +1,4 @@
-from datetime import datetime
-from io import BytesIO
+import tempfile
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
@@ -7,9 +6,10 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
-from reportlab.lib.pagesizes import A4
-from reportlab.pdfgen import canvas
 
+from weasyprint import HTML, CSS
+from django.template.loader import get_template, render_to_string
+from django.http import HttpResponse
 from django_journal.permissions import TeacherPermissionsMixin, TeacherLessonPermissionsMixin
 from django_journal.settings import TEACHER
 from people.models import User
@@ -18,46 +18,23 @@ from .models import GroupStudent, Score, Lesson
 
 
 class CreateReport(LoginRequiredMixin, View):
-
     def get(self, request):
-        response = HttpResponse(content_type='application/pdf')
-        d = datetime.today().strftime('%Y-%m-%d')
-        response['Content-Disposition'] = f'inline; filename="{d}.pdf"'
+        group = GroupStudent.objects.all()
 
-        buffer = BytesIO()
-        p = canvas.Canvas(buffer, pagesize=A4)
+        context = {'group': group}
 
-        # Data to print
-        data = {
-            "Posts": [{"title": "Python", "views": 500}, {"title": "JavaScript", "views": 500}],
-            "Videos": [{"title": "Python Programming", "likes": 500}],
-            "Blogs": [{"name": "Report Lab", "likes": 500, "claps": 500}],
-        }
+        html_string = render_to_string('report/students_grouplist.html',context)
+        html = HTML(string=html_string)
+        result = html.write_pdf()
 
-        p.setFont("Helvetica", 14, leading=None)
-        p.setFillColorRGB(0.29296875, 0.453125, 0.609375)
-        p.drawString(260, 800, "My PDF")
-        p.line(0, 780, 1000, 780)
-        p.line(0, 778, 1000, 778)
-        xl = 20
-        yl = 750
-
-        for k, v in data.items():
-            p.setFont("Helvetica", 14, leading=None)
-            p.drawString(xl, yl - 12, f"{k}")
-            for value in v:
-                for key, val in value.items():
-                    p.setFont("Helvetica", 12, leading=None)
-                    p.drawString(xl, yl - 20, f"{key} - {val}")
-                    yl = yl - 60
-        p.setTitle(f'Report on {d}')
-        p.showPage()
-        p.save()
-
-        pdf = buffer.getvalue()
-        buffer.close()
-        response.write(pdf)
-
+        response = HttpResponse(content_type='application/pdf;')
+        response['Content-Disposition'] = 'inline; filename="report.pdf"'
+        response['Content-Transfer-Encoding'] = 'binary'
+        with tempfile.NamedTemporaryFile(delete=True) as output:
+            output.write(result)
+            output.flush()
+            output.seek(0)
+            response.write(output.read())
         return response
 
 

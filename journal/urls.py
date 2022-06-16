@@ -10,5 +10,5 @@ urlpatterns = [
     path('group/<int:pk>/', GroupStudentDetailView.as_view(), name='group_student_detail'),
     path('<int:group_id>/<int:lesson_id>/', ScoreLessonListView.as_view(), name='score_lesson'),
     path('addscore/', AddScore.as_view(), name='add_score'),
-    path('generate-pdf/', CreateReport.as_view(), name='generate-pdf')
+    path('students_grouplist/', CreateReport.as_view(), name='students_grouplist')
 ]
